@@ -13,6 +13,7 @@
 		"build:check": "run-s libs:reload build lint type-check format test:e2e test:unit",
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
+		"preinstall": "npx only-allow pnpm",
 		"postinstall": "nuxt prepare",
 		"test:unit": "vitest run",
 		"test:e2e": "start-server-and-test preview http://localhost:3000/ 'cypress run --e2e'",
@@ -23,7 +24,7 @@
 		"lint-type-format": "run-s lint type-check format",
 		"design-tokens": "node scripts/tokens-tool.js",
 		"libs:check": "taze",
-		"libs:reload": "rm -rf node_modules package-lock.json && npm install"
+		"libs:reload": "rm -rf node_modules && pnpm install"
 	},
 	"dependencies": {
 		"@fontsource/jetbrains-mono": "^5.2.5",

@@ -2,13 +2,18 @@ FROM node:lts-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+# Install pnpm
+RUN npm install -g pnpm
 
-RUN npm install
+# Copy package.json, pnpm-lock.yaml and .npmrc
+COPY package.json pnpm-lock.yaml .npmrc ./
+
+# Install dependencies
+RUN pnpm install
 
 COPY . .
 
 EXPOSE 3000
 
-RUN npm run build
+RUN pnpm build
 CMD [ "node", ".output/server/index.mjs" ]

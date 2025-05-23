@@ -110,36 +110,31 @@ See [Nuxt Configuration Reference](https://nuxt.com/docs/api/configuration/nuxt-
 
 ## Project Setup
 
+> **Note:** This project uses pnpm exclusively as its package manager. Other package managers (npm, yarn) are not supported and will be blocked by the preinstall script.
+
 ### Install dependencies
 
 ```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
 pnpm install
 ```
 
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
 
 ```sh
-npm run test:unit
+pnpm test:unit
 ```
 
 ### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
 
 ```sh
-npm run build
-npm run test:e2e # or `npm run test:e2e:ci` for headless testing
+pnpm build
+pnpm test:e2e # or `pnpm test:e2e:dev` for interactive testing
 ```
 
 ### Lint with [ESLint](https://eslint.org/)
 
 ```sh
-npm run lint
+pnpm lint
 ```
 
 ## Development Server
@@ -147,7 +142,7 @@ npm run lint
 Start the development server on `http://localhost:3000`
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 ## Production
@@ -155,19 +150,19 @@ npm run dev
 Build the application for production:
 
 ```bash
-npm run build
+pnpm build
 ```
 
 Generate (SSG) the application for production:
 
 ```bash
-npm run generate
+pnpm generate
 ```
 
 Locally preview production build:
 
 ```bash
-npm run preview
+pnpm preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
