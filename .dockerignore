@@ -1,2 +1,29 @@
-node_modules
-.nuxt
+# Node modules
+node_modules/
+
+# Nuxt build output
+.nuxt/
+.output/  # This is crucial for Nuxt 3 build output
+.cache/
+
+# Development and Git specific files
+.env
+.env.*
+.git/
+.gitignore
+.editorconfig
+.vscode/  # IDE-specific settings
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Test artifacts
+coverage/
+cypress/videos/
+cypress/screenshots/
+
+# Other temporary files
+temp/
+tmp/

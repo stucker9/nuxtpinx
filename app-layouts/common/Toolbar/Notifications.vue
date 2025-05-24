@@ -56,15 +56,15 @@ onMounted(() => {
 			const newItem: Notification = {
 				id: 9999,
 				category: "news",
-				type: "success",
-				title: "Good news",
-				description: "HI! You can buy this template on Themeforest, click here.",
+				type: "info",
+				title: "Launched!",
+				description: "Please be patient while more functionality is added.",
 				read: false,
 				date: "Today",
 				action: () => {
-					window.open("https://themeforest.net/item/pinx-vuejs-admin-template/47799543", "_blank")
+					window.open("https://pinx-docs.vercel.app/", "_blank")
 				},
-				actionTitle: "Go to Themeforest"
+				actionTitle: "Go to Docs"
 			}
 
 			useNotifications().prepend(newItem, { autoNotify: true })

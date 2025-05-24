@@ -21,6 +21,19 @@ export default function getItems(args: { mode: "vertical" | "horizontal"; collap
 				),
 			key: "BlankPage",
 			icon: renderIcon(BlankIcon)
+		},
+		{
+			label: () =>
+				h(
+					RouterLink,
+					{
+						to: {
+							name: "dashboard-overview" // Use the Nuxt-generated route name
+						}
+					},
+					{ default: () => "Dashboard Overview" }
+				),
+			key: "dashboard-overview"
 		}
 	]
 }
