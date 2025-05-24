@@ -71,24 +71,36 @@ function toggleTheme(event?: MouseEvent) {
 	position: relative;
 	width: 20px;
 	height: 20px;
-	overflow: hidden;
 	outline: none;
 	border: none;
+	background: transparent;
+	transition: transform 0.3s ease;
+	z-index: 1;
+
+	&:hover {
+		transform: scale(1.1);
+	}
 
 	:deep() {
 		.n-icon {
 			position: absolute;
 			top: 0;
 			left: 0;
+			filter: drop-shadow(0 0 2px var(--primary-color));
+			z-index: 2;
+			overflow: visible;
 
 			& > svg {
 				position: absolute;
 				top: 0;
 				left: 0;
-				transition: opacity 0.35s;
+				transition: all 0.35s ease;
+				color: var(--primary-color);
+				overflow: visible;
 
 				&.hover {
 					opacity: 0;
+					transform: scale(1.2);
 				}
 				&:not(.hover) {
 					opacity: 1;
@@ -108,14 +120,17 @@ function toggleTheme(event?: MouseEvent) {
 		}
 	}
 }
+
 .rotate-enter-active,
 .rotate-leave-active {
 	transition: all 0.5s ease-out;
 }
+
 .rotate-enter-from {
 	opacity: 0;
 	transform: rotate(45deg);
 }
+
 .rotate-leave-to {
 	opacity: 0;
 	transform: rotate(-45deg);

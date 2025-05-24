@@ -3,7 +3,8 @@ import { h } from "vue"
 import { RouterLink } from "vue-router"
 import { renderIcon } from "@/utils"
 
-const BlankIcon = "carbon:document-blank"
+const DashboardIcon = "carbon:document-blank"
+const KioskIcon = "carbon:document-blank"
 
 // eslint-disable-next-line unused-imports/no-unused-vars
 export default function getItems(args: { mode: "vertical" | "horizontal"; collapsed: boolean }): MenuMixedOption[] {
@@ -14,13 +15,13 @@ export default function getItems(args: { mode: "vertical" | "horizontal"; collap
 					RouterLink,
 					{
 						to: {
-							name: "BlankPage"
+							name: "index"
 						}
 					},
-					{ default: () => "Blank Page" }
+					{ default: () => "Dashboard Overview" }
 				),
-			key: "BlankPage",
-			icon: renderIcon(BlankIcon)
+			key: "dashboard-overview",
+			icon: renderIcon(DashboardIcon)
 		},
 		{
 			label: () =>
@@ -28,12 +29,13 @@ export default function getItems(args: { mode: "vertical" | "horizontal"; collap
 					RouterLink,
 					{
 						to: {
-							name: "dashboard-overview" // Use the Nuxt-generated route name
+							name: "KioskSplash"
 						}
 					},
-					{ default: () => "Dashboard Overview" }
+					{ default: () => "Kiosk" }
 				),
-			key: "dashboard-overview"
+			key: "KioskSplash",
+			icon: renderIcon(KioskIcon)
 		}
 	]
 }

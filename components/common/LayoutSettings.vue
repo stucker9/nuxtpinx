@@ -122,11 +122,13 @@
 								<n-switch v-model:value="footerShown" size="small" />
 							</div>
 							<div class="flex items-center justify-between">
-								<div class="switch-label">
-									RTL
-									<span class="px-1 opacity-50">beta</span>
-								</div>
-								<n-switch v-model:value="rtl" size="small" />
+								<div class="switch-label">Font Family</div>
+								<n-select
+									v-model:value="fontFamilyType"
+									:options="fontFamilyOptions"
+									size="small"
+									style="width: 120px"
+								/>
 							</div>
 						</div>
 					</div>
@@ -141,13 +143,15 @@
 						<n-button class="mb-3! w-full!" strong secondary type="primary" @click="reset()">
 							Restore default
 						</n-button>
+						<n-button class="mb-3! w-full!" strong secondary type="info" @click="saveDefaults()">
+							Save default
+						</n-button>
 						<a
 							href="https://pinx-docs.vercel.app/layout"
 							target="_blank"
 							alt="docs"
-							rel="nofollow noopener noreferrer"
 						>
-							Other settings
+							Docs
 						</a>
 					</div>
 				</n-scrollbar>
@@ -158,11 +162,11 @@
 
 <script setup lang="ts">
 import { useWindowSize } from "@vueuse/core"
-import { NButton, NColorPicker, NScrollbar, NSelect, NSwitch, useOsTheme } from "naive-ui"
+import { NButton, NColorPicker, NScrollbar, NSelect, NSwitch, useNotification, useOsTheme } from "naive-ui"
 import { computed, ref } from "vue"
 import Icon from "@/components/common/Icon.vue"
 import { useThemeStore } from "@/stores/theme"
-import { Layout, RouterTransition, ThemeNameEnum } from "@/types/theme.d"
+import { FontFamilyType, Layout, RouterTransition, ThemeNameEnum } from "@/types/theme.d"
 
 interface ColorPalette {
 	light: string
@@ -183,6 +187,7 @@ const themeStore = useThemeStore()
 const { width: winWidth } = useWindowSize()
 const isMobileView = computed<boolean>(() => winWidth.value < 700)
 const open = ref(false)
+const notification = useNotification()
 const transitionOptions = [
 	{
 		label: "Fade",
@@ -231,11 +236,6 @@ const lightColor = computed({
 	set: val => themeStore.setColor(ThemeNameEnum.Light, "primary", val)
 })
 
-const rtl = computed({
-	get: () => themeStore.isRTL,
-	set: val => themeStore.setRTL(val)
-})
-
 const boxed = computed({
 	get: () => themeStore.isBoxed,
 	set: val => themeStore.setBoxed(val)
@@ -259,21 +259,55 @@ const palette = ref<Palette>([
 	{ light: "#FF0156", dark: "#FF0156" }
 ])
 
+const fontFamilyOptions = [
+	{
+		label: "Default",
+		value: FontFamilyType.Default
+	},
+	{
+		label: "Display",
+		value: FontFamilyType.Display
+	},
+	{
+		label: "Mono",
+		value: FontFamilyType.Mono
+	},
+	{
+		label: "Serif",
+		value: FontFamilyType.Serif
+	}
+]
+
+const fontFamilyType = computed({
+	get: () => themeStore.currentFontFamilyType,
+	set: val => themeStore.setFontFamilyType(val)
+})
+
 function setPrimary(color: ColorPalette) {
 	themeStore.setColor(ThemeNameEnum.Dark, "primary", color.dark)
 	themeStore.setColor(ThemeNameEnum.Light, "primary", color.light)
 }
 
 function reset() {
-	themeStore.setColor(ThemeNameEnum.Dark, "primary", "#00E19B")
-	themeStore.setColor(ThemeNameEnum.Light, "primary", "#00B27B")
-	themeStore.setTheme(useOsTheme().value === "dark" ? ThemeNameEnum.Dark : ThemeNameEnum.Light)
-	themeStore.setLayout(Layout.VerticalNav)
-	themeStore.setRouterTransition(RouterTransition.FadeUp)
-	themeStore.setRTL(false)
-	themeStore.setBoxed(true)
-	themeStore.setToolbarBoxed(true)
-	themeStore.setFooterShow(true)
+	// Use our custom reset method that handles user defaults
+	themeStore.reset()
+
+	notification.info({
+		title: "Settings Restored",
+		content: "Layout settings restored to default.",
+		duration: 3000
+	})
+}
+
+function saveDefaults() {
+	// Save current settings as user defaults
+	themeStore.saveDefaults()
+
+	notification.success({
+		title: "Settings Saved",
+		content: "Layout settings saved as your default preferences.",
+		duration: 3000
+	})
 }
 </script>
 
@@ -425,38 +459,6 @@ function reset() {
 	.anim-enter-from,
 	.anim-leave-to {
 		opacity: 0;
-		// transform: translateY(1%);
-	}
-}
-
-.direction-rtl {
-	.layout-settings {
-		right: unset;
-		left: 10px;
-
-		.ls-form {
-			.ls-header {
-				direction: rtl;
-			}
-
-			:deep() {
-				.n-color-picker {
-					.n-color-picker-trigger {
-						.n-color-picker-trigger__fill {
-							.n-color-picker-trigger__value {
-								margin-left: unset !important;
-								margin-right: 44px;
-							}
-						}
-					}
-				}
-			}
-		}
-
-		&.open {
-			right: unset;
-			left: 16px;
-		}
 	}
 }
 </style>

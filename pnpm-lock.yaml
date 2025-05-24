@@ -18,6 +18,9 @@ importers:
       '@fontsource/lexend':
         specifier: ^5.2.7
         version: 5.2.7
+      '@fontsource/merriweather':
+        specifier: ^5.2.7
+        version: 5.2.7
       '@fontsource/public-sans':
         specifier: ^5.2.5
         version: 5.2.5
@@ -696,6 +699,9 @@ packages:
 
   '@fontsource/lexend@5.2.7':
     resolution: {integrity: sha512-LvhJCaFlpR3/5msAzvIGJqVlvcVIN/Je9niM+pCFUazGeeb0ygOu0TlyAAJCi1TpN3te6tVqnDVMW+1fSFNQ9w==}
+
+  '@fontsource/merriweather@5.2.7':
+    resolution: {integrity: sha512-ryOP1w5L0bZCFm1YoITndy18N+4Z07sJFkWEl9XxCAbqx88gkUO/F/vjPMw4Uup20w6plDD5w6xmsRiAI3+1NA==}
 
   '@fontsource/public-sans@5.2.5':
     resolution: {integrity: sha512-WSRBuKX8dwHxc35s/Q1arB7vkGL2A9YHB93gRP9OTu/nYgat0CBHfsAOUSDehBnREHa0rYZvWDDS08w5qPoWvg==}
@@ -6936,6 +6942,8 @@ snapshots:
   '@fontsource/jetbrains-mono@5.2.5': {}
 
   '@fontsource/lexend@5.2.7': {}
+
+  '@fontsource/merriweather@5.2.7': {}
 
   '@fontsource/public-sans@5.2.5': {}
 

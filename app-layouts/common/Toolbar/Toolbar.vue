@@ -19,7 +19,6 @@
 
 				<PillWrapper>
 					<Search />
-					<LocaleSwitch />
 					<FullscreenSwitch />
 					<ThemeSwitch />
 					<Notifications />

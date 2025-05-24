@@ -1,7 +1,6 @@
 import type { GlobalThemeOverrides, ThemeCommonVars } from "naive-ui"
-import { useOsTheme } from "naive-ui"
 import tokens from "@/design-tokens.json"
-import { Layout, RouterTransition, ThemeNameEnum } from "@/types/theme.d"
+import { FontFamilyType, Layout, RouterTransition, ThemeNameEnum } from "@/types/theme.d"
 import { colorToArray, expandPattern, getThemeColors, getTypeValue } from "@/utils/theme"
 
 type ThemeState = ReturnType<typeof getDefaultState>
@@ -10,18 +9,16 @@ interface ThemeGetters {
 	naiveCommon: ThemeCommonVars
 }
 
-const osTheme = useOsTheme()
-
 export function getDefaultState() {
 	return {
 		layout: Layout.VerticalNav, // Type of layout, with vertical or horizontal navigation
-		themeName: osTheme.value === "dark" ? ThemeNameEnum.Dark : ThemeNameEnum.Light, // Theme name (Dark, Light), with fallback to the light theme
-		routerTransition: RouterTransition.FadeUp, // Type of transition for the router
+		themeName: ThemeNameEnum.Dark, // Theme name (Dark, Light), setting Dark as default
+		routerTransition: RouterTransition.FadeRight, // Type of transition for the router, setting FadeRight as default
 		routerTransitionDuration: 0.3, // Duration of the router transition in seconds
-		rtl: false, // RTL (right to left) mode toggle
+		selectedFontFamilyType: FontFamilyType.Default, // Selected font family type
 		boxed: {
-			enabled: true, // Choose whether to apply a maximum width to the page
-			toolbar: true, // Choose whether to apply the maximum width to the toolbar as well
+			enabled: false, // Choose whether to apply a maximum width to the page, setting to false
+			toolbar: false, // Choose whether to apply the maximum width to the toolbar as well
 			width: 1600 // Maximum width size in pixels
 		},
 		sidebar: {
@@ -43,17 +40,26 @@ export function getDefaultState() {
 				viewPadding: {
 					desk: 40, // View padding for desktop
 					mobile: 20 // View padding for mobile devices
-				},
-				toolbarHeight: {
-					desk: 80, // Height of the toolbar for desktop
-					mobile: 70 // Height of the toolbar for mobile devices
 				}
+			},
+			toolbarHeight: {
+				desk: 80, // Height of the toolbar for desktop
+				mobile: 70 // Height of the toolbar for mobile devices
 			}
 		},
 		toolbarHeight: 80, // Default toolbar height (in pixels)
 		viewPadding: 40, // Default view padding (in pixels)
 		headerBarHeight: 60, // Height of the header bar (in pixels)
-		colors: tokens.colors, // Color definitions from the token
+		colors: {
+			light: {
+				...tokens.colors.light,
+				primary: "rgb(97, 102, 255)" // Setting default primary color to blue for light theme
+			},
+			dark: {
+				...tokens.colors.dark,
+				primary: "rgb(97, 102, 255)" // Setting default primary color to blue for dark theme
+			}
+		}, // Color definitions from the token
 		borderRadius: tokens.borderRadius, // Border radius from the token
 		lineHeight: tokens.lineHeight, // Line height from the token
 		fontSize: tokens.fontSize, // Font size from the token

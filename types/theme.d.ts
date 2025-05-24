@@ -17,6 +17,13 @@ export enum ThemeNameEnum {
 	Light = "light"
 }
 
+export enum FontFamilyType {
+	Default = "default",
+	Display = "display",
+	Mono = "mono",
+	Serif = "serif"
+}
+
 export type ColorScene = "" | "Suppl" | "Hover" | "Pressed"
 export type ColorKey = `${ColorType}Color${ColorScene}`
 export type ThemeColor = Partial<Record<ColorKey, string>>
