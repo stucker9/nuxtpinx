@@ -14,6 +14,7 @@ dist-ssr
 coverage
 *.local
 unplugin.components.d.ts
+*.drawio
 
 /cypress/videos/
 /cypress/screenshots/
